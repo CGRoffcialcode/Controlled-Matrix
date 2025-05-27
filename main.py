@@ -187,6 +187,17 @@ def save_matrix_video(
             col_palettes = [random.randint(0, len(palettes)-1) for _ in range(columns)]
         else:
             draw.text((20, 10), f"Timer: {timer_str}  Color: {palette_index}", font=small_font, fill=(255,255,255))
+        # --- Add CGROFFICIALCODE top right ---
+        text_top_right = "@CGRofficialcode"
+        w_tr, h_tr = draw.textsize(text_top_right, font=small_font)
+        draw.text((width - w_tr - 20, 10), text_top_right, font=small_font, fill=(255,255,255))
+        # --- Add cgrcodeyt bottom left ---
+        text_bl = "@cgrcodeyt"
+        w_bl, h_bl = draw.textsize(text_bl, font=small_font)
+        draw.text((20, height - h_bl - 20), text_bl, font=small_font, fill=(255,255,255))
+        # --- Add cgrcodeyt bottom right ---
+        w_br, h_br = draw.textsize(text_bl, font=small_font)
+        draw.text((width - w_br - 20, height - h_br - 20), text_bl, font=small_font, fill=(255,255,255))
         for col in range(columns):
             head = drops[col]
             length = lengths[col]
