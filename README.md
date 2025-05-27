@@ -15,7 +15,11 @@
 
 Note: you can remove the watermark, but please keep it if you are going to share it with other people
 
-
+  / ____|          | |           | | |        | | |  \/  |     | |          
+ | |     ___  _ __ | |_ _ __ ___ | | | ___  __| | | \  / | __ _| |_ _ __ ___  __
+ | |    / _ \| '_ \| __| '__/ _ \| | |/ _ \/ _` | | |\/| |/ _` | __| '__| \ \/ /
+ | |___| (_) | | | | |_| | | (_) | | |  __/ (_| | | |  | | (_| | |_| |  | |>  < 
+  \_____\___/|_| |_|\__|_|  \___/|_|_|\___|\__,_| |_|  |_|\__,_|\__|_|  |_/_/\_\
 
 # How to set up
 * First, go to ***exe (runtime here)*** and take *main.exe* and run it in a console.
