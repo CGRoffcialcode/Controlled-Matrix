@@ -15,11 +15,11 @@
 
 Note: you can remove the watermark, but please keep it if you are going to share it with other people
 
-  / ____|          | |           | | |        | | |  \/  |     | |          
- | |     ___  _ __ | |_ _ __ ___ | | | ___  __| | | \  / | __ _| |_ _ __ ___  __
- | |    / _ \| '_ \| __| '__/ _ \| | |/ _ \/ _` | | |\/| |/ _` | __| '__| \ \/ /
- | |___| (_) | | | | |_| | | (_) | | |  __/ (_| | | |  | | (_| | |_| |  | |>  < 
-  \_____\___/|_| |_|\__|_|  \___/|_|_|\___|\__,_| |_|  |_|\__,_|\__|_|  |_/_/\_\
+#  / ____|          | |           | | |        | | |  \/  |     | |          
+# | |     ___  _ __ | |_ _ __ ___ | | | ___  __| | | \  / | __ _| |_ _ __ ___  __
+# | |    / _ \| '_ \| __| '__/ _ \| | |/ _ \/ _` | | |\/| |/ _` | __| '__| \ \/ /
+# | |___| (_) | | | | |_| | | (_) | | |  __/ (_| | | |  | | (_| | |_| |  | |>  < 
+#  \_____\___/|_| |_|\__|_|  \___/|_|_|\___|\__,_| |_|  |_|\__,_|\__|_|  |_/_/\_\
 
 Pressing v genereats a video in 4K
 * CTRL + SHIFT + ALT for chanigng colour
@@ -28,7 +28,11 @@ Pressing v genereats a video in 4K
 * First, go to ***exe (runtime here)*** and take *main.exe* and run it in a console.
 * This is how Controlled Matrix works!
 Now, you can choose between a screensaver, and a wallpaper
-* Just generate a video and bring it over as a screen saver
+
+# Wallpaper
+* Just generate a video and bring it over as a wallpaer using ***Lively Wallpaper*** or ***Wallpaper engine (please add watermark if u are going to share it) ***
+* Or with the terminal setitngs below, run the exe and using ***Transulecent TB*** you can make an effective wallpaper without a application
+##### (Settings for TB): Desktop (Clear) Visible window (Clear) Start opened (clear)
 
 # Screensaver
 * Take *main.scr* and place it in System32
@@ -42,3 +46,6 @@ Next, go to terminal
 # You're done!
 
 
+### Example video given, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭)
+
+###### Credits to @CGRCODEYT

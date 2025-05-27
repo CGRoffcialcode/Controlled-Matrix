@@ -289,7 +289,7 @@ if __name__ == "__main__":
     print(intro)
     choice = input("Type 'v' to save video, anything else for terminal animation: ").strip().lower()
 
-    color_names_for_display = [p[0] for p in palettes] + ["Mixed", "Mixed v2"]
+    color_names_for_display = [p[0] for p in palettes]
 
     if choice == 'v':
         print("Available colors:")
