@@ -30,7 +30,7 @@ Pressing v genereats a video in 4K
 Now, you can choose between a screensaver, and a wallpaper
 
 # Wallpaper
-* Just generate a video and bring it over as a wallpaer using ***Lively Wallpaper*** or ***Wallpaper engine (please add watermark if u are going to share it) ***
+* Just generate a video and bring it over as a wallpaer using ***Lively Wallpaper*** or ***Wallpaper engine (please add watermark if u are going to share it)***
 * Or with the terminal setitngs below, run the exe and using ***Transulecent TB*** you can make an effective wallpaper without a application
 ##### (Settings for TB): Desktop (Clear) Visible window (Clear) Start opened (clear)
 
