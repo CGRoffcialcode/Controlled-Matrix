@@ -14,3 +14,22 @@
  * along with this code.  If not, see <https://www.gnu.org/licenses/>.
 
 Note: you can remove the watermark, but please keep it if you are going to share it with other people
+
+
+
+# How to set up
+* First, go to ***exe (runtime here)*** and take *main.exe* and run it in a console.
+* This is how Controlled Matrix works!
+Now, you can choose between a screensaver, and a wallpaper
+* Wallpaper needs setup, as I don't yet know how to set it up
+
+# Screensaver
+* Take *main.scr* and place it in System32
+* Then open ***Change screen saver*** (search it up) 
+* Now select main
+Next, go to terminal
+* Go to startup
+* Select Launch parameters
+* Select Full screen on launch mode 
+
+# You're done!
