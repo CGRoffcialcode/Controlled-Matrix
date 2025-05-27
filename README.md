@@ -21,11 +21,14 @@ Note: you can remove the watermark, but please keep it if you are going to share
  | |___| (_) | | | | |_| | | (_) | | |  __/ (_| | | |  | | (_| | |_| |  | |>  < 
   \_____\___/|_| |_|\__|_|  \___/|_|_|\___|\__,_| |_|  |_|\__,_|\__|_|  |_/_/\_\
 
+Pressing v genereats a video in 4K
+* CTRL + SHIFT + ALT for chanigng colour
+
 # How to set up
 * First, go to ***exe (runtime here)*** and take *main.exe* and run it in a console.
 * This is how Controlled Matrix works!
 Now, you can choose between a screensaver, and a wallpaper
-* Wallpaper needs setup, as I don't yet know how to set it up
+* Just generate a video and bring it over as a screen saver
 
 # Screensaver
 * Take *main.scr* and place it in System32
@@ -37,3 +40,5 @@ Next, go to terminal
 * Select Full screen on launch mode 
 
 # You're done!
+
+
