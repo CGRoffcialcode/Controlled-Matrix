@@ -1,19 +1,4 @@
-* Copyright (C) 2025 CGRofficialcode
- *
- * This code is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Thiscode is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this code.  If not, see <https://www.gnu.org/licenses/>.
 
-Note: you can remove the watermark, but please keep it if you are going to share it with other people
 
 #  / ____|          | |           | | |        | | |  \/  |     | |          
 # | |     ___  _ __ | |_ _ __ ___ | | | ___  __| | | \  / | __ _| |_ _ __ ___  __
@@ -21,7 +6,7 @@ Note: you can remove the watermark, but please keep it if you are going to share
 # | |___| (_) | | | | |_| | | (_) | | |  __/ (_| | | |  | | (_| | |_| |  | |>  < 
 #  \_____\___/|_| |_|\__|_|  \___/|_|_|\___|\__,_| |_|  |_|\__,_|\__|_|  |_/_/\_\
 
-Pressing v genereats a video in 4K
+* Pressing v genereats a video in 4K
 * CTRL + SHIFT + ALT for chanigng colour
 
 # How to set up
@@ -49,3 +34,20 @@ Next, go to terminal
 ### Example video given, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭)
 
 ###### Credits to @CGRCODEYT
+
+* Copyright (C) 2025 CGRofficialcode
+ *
+ * This code is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Thiscode is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this code.  If not, see <https://www.gnu.org/licenses/>.
+
+Note: you can remove the watermark, but please keep it if you are going to share it with other people
