@@ -140,7 +140,8 @@ def matrix():
         print("\033[?25h", end="", flush=True)
 
 def save_matrix_video(
-    frames=3000, fps=60, width=3840, height=2160, font_size=36, output="matrix_animation_4k.mp4", palette_index=0, mixed_v2_cycle=2, show_watermark=True
+    frames=3000, fps=60, width=3840, height=2160, font_size=36, output="matrix_animation_4k.mp4",
+    palette_index=0, mixed_v2_cycle=2, show_watermark=True
 ):
     palettes = [
         [(0,255,0), (0,180,0), (0,100,0)],      # Green
@@ -159,10 +160,8 @@ def save_matrix_video(
     rows = height // font_size
     try:
         font = ImageFont.truetype("consola.ttf", font_size)
-        small_font = ImageFont.truetype("consola.ttf", font_size // 2)
     except:
         font = ImageFont.load_default()
-        small_font = ImageFont.load_default()
     drops = [random.randint(0, rows) for _ in range(columns)]
     lengths = [random.randint(6, rows // 2) for _ in range(columns)]
     col_palettes = [random.randint(0, len(palettes)-1) for _ in range(columns)]
@@ -177,26 +176,25 @@ def save_matrix_video(
         img = Image.new("RGB", (width, height), (0, 0, 0))
         draw = ImageDraw.Draw(img)
         elapsed = frame / fps
-        # For Mixed v2, determine which palette to use
-        if palette_index == len(palettes)+1:  # Mixed v2
-            v2_palette_idx = int((elapsed // mixed_v2_cycle) % len(palettes))
-        # --- Add Timer on top left in large font ---
+
+        # Draw watermark (includes timer and color info)
+                # Always calculate timer_str for terminal print
         timer_str = time.strftime('%H:%M:%S', time.gmtime(elapsed))
-        timer_text = f"Timer: {timer_str}  Color: Mixed v2" if palette_index == len(palettes)+1 else \
-                     f"Timer: {timer_str}  Color: Mixed" if palette_index == len(palettes) else \
-                     f"Timer: {timer_str}  Color: {palette_index}"
-        try:
-            timer_font = ImageFont.truetype("consola.ttf", font_size)
-        except:
-            timer_font = font
-        bbox_timer = draw.textbbox((0, 0), timer_text, font=timer_font)
-        draw.text((20, 10), timer_text, font=timer_font, fill=(255,255,255))
-        # Draw watermarks if enabled
+        # Draw watermark (includes timer and color info)
         if show_watermark:
             try:
                 brand_font = ImageFont.truetype("consola.ttf", font_size)
             except:
                 brand_font = font
+            # Timer and color info (top left, large)
+            if palette_index == len(palettes)+1:
+                timer_text = f"Timer: {timer_str}  Color: Mixed v2"
+            elif palette_index == len(palettes):
+                timer_text = f"Timer: {timer_str}  Color: Mixed"
+            else:
+                timer_text = f"Timer: {timer_str}  Color: {palette_index}"
+            bbox_timer = draw.textbbox((0, 0), timer_text, font=brand_font)
+            draw.text((20, 10), timer_text, font=brand_font, fill=(255,255,255))
             # Top right
             text_top_right = "@CGRofficialcode"
             bbox_tr = draw.textbbox((0, 0), text_top_right, font=brand_font)
@@ -216,6 +214,8 @@ def save_matrix_video(
             if palette_index == len(palettes):  # Mixed
                 pal = palettes[col_palettes[col]]
             elif palette_index == len(palettes)+1:  # Mixed v2
+                elapsed = frame / fps
+                v2_palette_idx = int(elapsed // mixed_v2_cycle) % (len(palettes))
                 pal = palettes[v2_palette_idx]
             else:
                 pal = palettes[palette_index]
