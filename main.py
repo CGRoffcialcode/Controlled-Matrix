@@ -177,29 +177,36 @@ def save_matrix_video(
         img = Image.new("RGB", (width, height), (0, 0, 0))
         draw = ImageDraw.Draw(img)
         elapsed = frame / fps
+                # --- Add Timer on top left in large font ---
         timer_str = time.strftime('%H:%M:%S', time.gmtime(elapsed))
-        # Mixed v2: cycle palette every mixed_v2_cycle seconds
-        if palette_index == len(palettes)+1:
-            v2_palette_idx = int((frame / fps) // mixed_v2_cycle) % len(palettes)
-            draw.text((20, 10), f"Timer: {timer_str}  Color: Mixed v2", font=small_font, fill=(255,255,255))
-        elif palette_index == len(palettes):
-            draw.text((20, 10), f"Timer: {timer_str}  Color: Mixed", font=small_font, fill=(255,255,255))
-            col_palettes = [random.randint(0, len(palettes)-1) for _ in range(columns)]
-        else:
-            draw.text((20, 10), f"Timer: {timer_str}  Color: {palette_index}", font=small_font, fill=(255,255,255))
-                # --- Add CGROFFICIALCODE top right ---
+        timer_text = f"Timer: {timer_str}  Color: Mixed v2" if palette_index == len(palettes)+1 else \
+                     f"Timer: {timer_str}  Color: Mixed" if palette_index == len(palettes) else \
+                     f"Timer: {timer_str}  Color: {palette_index}"
+        try:
+            timer_font = ImageFont.truetype("consola.ttf", font_size)
+        except:
+            timer_font = font
+        bbox_timer = draw.textbbox((0, 0), timer_text, font=timer_font)
+        w_timer, h_timer = bbox_timer[2] - bbox_timer[0], bbox_timer[3] - bbox_timer[1]
+        draw.text((20, 10), timer_text, font=timer_font, fill=(255,255,255))
+        # --- Add CGROFFICIALCODE top right ---
         text_top_right = "@CGRofficialcode"
-        bbox_tr = draw.textbbox((0, 0), text_top_right, font=small_font)
+        # Use a larger font for branding
+        try:
+            brand_font = ImageFont.truetype("consola.ttf", font_size)
+        except:
+            brand_font = font
+        bbox_tr = draw.textbbox((0, 0), text_top_right, font=brand_font)
         w_tr, h_tr = bbox_tr[2] - bbox_tr[0], bbox_tr[3] - bbox_tr[1]
-        draw.text((width - w_tr - 20, 10), text_top_right, font=small_font, fill=(255,255,255))
+        draw.text((width - w_tr - 20, 10), text_top_right, font=brand_font, fill=(255,255,255))
         # --- Add cgrcodeyt bottom left ---
         text_bl = "@cgrcodeyt"
-        bbox_bl = draw.textbbox((0, 0), text_bl, font=small_font)
+        bbox_bl = draw.textbbox((0, 0), text_bl, font=brand_font)
         w_bl, h_bl = bbox_bl[2] - bbox_bl[0], bbox_bl[3] - bbox_bl[1]
-        draw.text((20, height - h_bl - 20), text_bl, font=small_font, fill=(255,255,255))
+        draw.text((20, height - h_bl - 20), text_bl, font=brand_font, fill=(255,255,255))
         # --- Add cgrcodeyt bottom right ---
         w_br, h_br = w_bl, h_bl
-        draw.text((width - w_br - 20, height - h_br - 20), text_bl, font=small_font, fill=(255,255,255))
+        draw.text((width - w_br - 20, height - h_br - 20), text_bl, font=brand_font, fill=(255,255,255))
         for col in range(columns):
             head = drops[col]
             length = lengths[col]
@@ -269,7 +276,15 @@ if __name__ == "__main__":
                     print("Please enter a positive number.")
             except ValueError:
                 print("Please enter a valid number.")
-        fps = 60
+        while True:
+            try:
+                fps = int(input("How many frames per second? (e.g. 60): "))
+                if fps > 0:
+                    break
+                else:
+                    print("Please enter a positive integer.")
+            except ValueError:
+                print("Please enter a valid integer.")
         frames = int(minutes * 60 * fps)
         save_matrix_video(frames=frames, fps=fps, palette_index=color_idx, mixed_v2_cycle=mixed_v2_cycle)
     else:
