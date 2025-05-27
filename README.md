@@ -13,4 +13,4 @@
  * You should have received a copy of the GNU General Public License
  * along with this code.  If not, see <https://www.gnu.org/licenses/>.
 
-
+Note: you can remove the watermark, but please keep it if you are going to share it with other people
