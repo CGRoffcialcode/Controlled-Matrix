@@ -37,7 +37,9 @@ def matrix():
     palette_index = 0
     columns, rows = shutil.get_terminal_size((80, 24))
     drops = [random.randint(0, rows) for _ in range(columns)]
-    lengths = [random.randint(6, rows // 2) for _ in range(columns)]
+    min_length = 2
+    max_length = max(min_length, rows // 2)
+    lengths = [random.randint(min_length, max_length) for _ in range(columns)]
     col_palettes = [random.randint(0, len(palettes)-3) for _ in range(columns)] # exclude Mixed/Mixed v2
 
     mixed_v2_cycle = 2
