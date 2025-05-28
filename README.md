@@ -16,12 +16,14 @@ Terminal Animation (low quality)
 
 # How to set up
 * Download as zip file, or clone the repository
-![ZIP](static\image.png)
+
+![ZIP](static/zipphoto.png)
+
 * Then, go to ***exe (runtime here)*** and take *main.exe* and run it in ***File explorer***.
 
-![Where exe is.](static\where_exe_is.png)
+![Where exe is.](static/where_exe_is.png)
 
-![EXE](static\exe.png)
+![EXE](static/exe.png)
 
 ###### (Hints)
 ###### Pressing v genereats a video in 4K
