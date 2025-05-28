@@ -7,7 +7,7 @@
 ```
 * Pressing v genereats a video in 4K
 * CTRL + SHIFT + ALT for chanigng colour
-# THERE IS NO SUPPORT FOR LINUX or MAC YET. USING TOOLS IN LINUX MAY GIVE UNDESIRED RESULTS (I have no idea baccically)
+### THERE IS NO SUPPORT FOR LINUX or MAC YET. USING TOOLS IN LINUX MAY GIVE UNDESIRED RESULTS (I have no idea baccically)
 # How to set up
 * Download as zip file, or clone the repository
 * Then, go to ***exe (runtime here)*** and take *main.exe* and run it in ***File explorer***.
