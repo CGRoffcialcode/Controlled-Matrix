@@ -9,6 +9,7 @@
 * CTRL + SHIFT + ALT for chanigng colour
 
 # How to set up
+* Download as zip
 * First, go to ***exe (runtime here)*** and take *main.exe* and run it in a console.
 * This is how Controlled Matrix works!
 Now, you can choose between a screensaver, and a wallpaper
