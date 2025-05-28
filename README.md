@@ -22,7 +22,7 @@ Now, you can choose between a screensaver, and a wallpaper
 * Take *main.scr* and place it in System32
 * Then open ***Change screen saver*** (search it up) 
 * Now select main
-Next, go to terminal
+# Next, go to terminal (terminal settings for nice wallpaper background)
 * Go to startup
 * Select Launch parameters
 * Select Full screen on launch mode 
