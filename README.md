@@ -11,7 +11,7 @@
 
 Terminal Animation (low quality)
 
-##### <video src="static/terminalAnimation.mp4" controls width="600"></video>
+<video src="static/terminalAnimation.mp4" controls width="600"></video>
 
 # How to set up
 * Download as zip file, or clone the repository
@@ -55,7 +55,8 @@ Now, you can choose between a screensaver, and a wallpaper
 # You're done!
 
 
-### Example video given for Wallpaper, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭) [Animation](static/matrix_animation_4k.mp4)
+### Example video given for Wallpaper, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭)
+[Animation](static/matrix_animation_4k.mp4)
 
 ###### Credits to @CGRCODEYT
 
