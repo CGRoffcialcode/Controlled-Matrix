@@ -31,7 +31,7 @@ Now, you can choose between a screensaver, and a wallpaper
 # You're done!
 
 
-### Example video given, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭)
+### Example video given for Wallpaper, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭)
 
 ###### Credits to @CGRCODEYT
 
