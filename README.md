@@ -7,12 +7,11 @@
 ```
 
 ### THERE IS NO SUPPORT FOR LINUX or MAC YET. USING TOOLS IN LINUX MAY GIVE UNDESIRED RESULTS (I have no idea baccically)
-# How to set up
+
 
 Terminal Animation (low quality)
 
-##### https://cdn.discordapp.com/attachments/1273694098871554111/1376660595717439499/20250526-2036-52.3443406.mp4?ex=68362297&is=6834d117&hm=d8fddaacd38f78e31f47f858ffda3f6ce5d08a5a1688ea5e356d39ad34c99bf7&
-
+##### <video src="static/terminalAnimation.mp4" controls width="600"></video>
 
 # How to set up
 * Download as zip file, or clone the repository
@@ -36,7 +35,7 @@ Now, you can choose between a screensaver, and a wallpaper
 # Wallpaper
 * Just generate a video and bring it over as a wallpaer using ***Lively Wallpaper*** or ***Wallpaper engine (please add watermark if u are going to share it)***
 
-https://cdn.discordapp.com/attachments/1273694098871554111/1376668559937372322/matrix_animation_4k.mp4?ex=68362a01&is=6834d881&hm=f16425082ce07e16c382d01e88cd19821e14d2895147a6aa0944
+<video src="matrix_animation_4k.mp4" controls width="600"></video>
 
 * Or with the terminal setitngs below, run the exe and using ***Transulecent TB*** you can make an effective wallpaper without a application
 ##### (Settings for TB): Desktop (Clear) Visible window (Clear) Start opened (blur or clear)
@@ -56,7 +55,7 @@ https://cdn.discordapp.com/attachments/1273694098871554111/1376668559937372322/m
 # You're done!
 
 
-### Example video given for Wallpaper, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭)
+### Example video given for Wallpaper, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭) [Animation](https://cdn.discordapp.com/attachments/1273694098871554111/1376660595717439499/20250526-2036-52.3443406.mp4)
 
 ###### Credits to @CGRCODEYT
 
