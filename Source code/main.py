@@ -216,10 +216,12 @@ def save_matrix_video(
 
             color_names_for_display = [p[0] for p in palettes] + ["Mixed", "Mixed v2"]
             current_palette_name = color_names_for_display[palette_index]
-            timer_text = f"Timer: {timer_str} Color: {current_palette_name}"
+            # Remove timer from watermark
+            # timer_text = f"Timer: {timer_str} Color: {current_palette_name}"
+            color_text = f"Color: {current_palette_name}"
 
-            bbox_timer = draw.textbbox((0, 0), timer_text, font=brand_font)
-            draw.text((20, 10), timer_text, font=brand_font, fill=(255,255,255))
+            bbox_color = draw.textbbox((0, 0), color_text, font=brand_font)
+            draw.text((20, 10), color_text, font=brand_font, fill=(255,255,255))
 
             text_top_right = "@CGRofficialcode"
             bbox_tr = draw.textbbox((0, 0), text_top_right, font=brand_font)
@@ -291,64 +293,73 @@ if __name__ == "__main__":
 
     color_names_for_display = [p[0] for p in palettes]
 
-    if choice == 'v':
-        print("Available colors:")
-        for idx, name in enumerate(color_names_for_display):
-            print(f"{idx}: {name}")
-        while True:
-            try:
-                color_idx = int(input("Choose the color number for the Matrix animation: "))
-                if 0 <= color_idx < len(color_names_for_display):
-                    break
-                else:
-                    print("Please enter a valid number.")
-            except ValueError:
-                print("Please enter a valid number.")
-
-        mixed_v2_cycle = 2
-        if color_idx == len(color_names_for_display)-1:
-            try:
-                mixed_v2_cycle = float(input("How many seconds per color for Mixed v2? (e.g. 2): "))
-            except ValueError:
-                mixed_v2_cycle = 2
-
-        while True:
-            try:
-                minutes = float(input("How many minutes do you want the animation to be? (e.g. 1 for 1 minute): "))
-                if minutes > 0:
-                    break
-                else:
-                    print("Please enter a positive number.")
-            except ValueError:
-                print("Please enter a valid number.")
-
-        while True:
-            try:
-                fps = int(input("How many frames per second? (e.g. 60): "))
-                if fps > 0:
-                    break
-                else:
-                    print("Please enter a positive integer.")
-            except ValueError:
-                print("Please enter a valid integer.")
-
-        while True:
-            watermark_choice = input("Do you want to keep the watermark? (y/n): ").strip().lower()
-            if watermark_choice in ("y", "n"):
+if choice == 'v':
+    print("Available colors:")
+    for idx, name in enumerate(color_names_for_display):
+        print(f"{idx}: {name}")
+    while True:
+        try:
+            color_idx = int(input("Choose the color number for the Matrix animation: "))
+            if 0 <= color_idx < len(color_names_for_display):
                 break
             else:
-                print("Please enter 'y' or 'n'.")
+                print("Please enter a valid number.")
+        except ValueError:
+            print("Please enter a valid number.")
 
-        if watermark_choice == "n":
-            print("Reminder: Removing the watermark is for personal use only. Do not share videos without the watermark. The watermark is there for attribution.")
+    mixed_v2_cycle = 2
+    if color_idx == len(color_names_for_display)-1:
+        try:
+            mixed_v2_cycle = float(input("How many seconds per color for Mixed v2? (e.g. 2): "))
+        except ValueError:
+            mixed_v2_cycle = 2
 
-        frames = int(minutes * 60 * fps)
-        save_matrix_video(
+    while True:
+        try:
+            minutes = float(input("How many minutes do you want the animation to be? (e.g. 1 for 1 minute): "))
+            if minutes > 0:
+                break
+            else:
+                print("Please enter a positive number.")
+        except ValueError:
+            print("Please enter a valid number.")
+
+    while True:
+        try:
+            fps = int(input("How many frames per second? (e.g. 60): "))
+            if fps > 0:
+                break
+            else:
+                print("Please enter a positive integer.")
+        except ValueError:
+            print("Please enter a valid integer.")
+
+    while True:
+        watermark_choice = input("Do you want to keep the watermark? (y/n): ").strip().lower()
+        if watermark_choice in ("y", "n"):
+            break
+        else:
+            print("Please enter 'y' or 'n'.")
+
+    if watermark_choice == "n":
+        print("Reminder: Removing the watermark is for personal use only. Do not share videos without the watermark. The watermark is there for attribution.")
+
+
+    frames = int(minutes * 60 * fps)
+
+    # --- Estimate video size and display to user ---
+    duration_sec = minutes * 60
+    mb_per_sec = 4  # 4 MB/sec for 4K (rough estimate)
+    estimated_size_mb = duration_sec * mb_per_sec
+    estimated_size_gb = estimated_size_mb / 1024
+    print(f"\nEstimated video size: {estimated_size_mb:.1f} MB ({estimated_size_gb:.2f} GB) for {minutes} minute(s) at 4K {fps}fps.\n")
+
+    save_matrix_video(
             frames=frames,
             fps=fps,
             palette_index=color_idx,
             mixed_v2_cycle=mixed_v2_cycle,
             show_watermark=(watermark_choice == "y")
         )
-    else:
+else:
         matrix()
