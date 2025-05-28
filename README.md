@@ -35,7 +35,7 @@ Now, you can choose between a screensaver, and a wallpaper
 # Wallpaper
 * Just generate a video and bring it over as a wallpaer using ***Lively Wallpaper*** or ***Wallpaper engine (please add watermark if u are going to share it)***
 
-<video src="matrix_animation_4k.mp4" controls width="600"></video>
+<video src="static/matrix_animation_4k.mp4" controls width="600"></video>
 
 * Or with the terminal setitngs below, run the exe and using ***Transulecent TB*** you can make an effective wallpaper without a application
 ##### (Settings for TB): Desktop (Clear) Visible window (Clear) Start opened (blur or clear)
@@ -55,7 +55,7 @@ Now, you can choose between a screensaver, and a wallpaper
 # You're done!
 
 
-### Example video given for Wallpaper, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭) [Animation](https://cdn.discordapp.com/attachments/1273694098871554111/1376660595717439499/20250526-2036-52.3443406.mp4)
+### Example video given for Wallpaper, (mixed v2 wth watermark) (i recommend you use it becuase you need a NASA computer to generate it without it taking a year 😭) [Animation](static/matrix_animation_4k.mp4)
 
 ###### Credits to @CGRCODEYT
 
