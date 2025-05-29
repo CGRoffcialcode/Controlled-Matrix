@@ -24,6 +24,7 @@ jobs:
           pip install pyinstaller pillow imageio numpy requests keyboard
 
       - name: Clean runtime folder
+        shell: cmd
         run: |
           if exist runtime (
             del /q /f runtime\*
