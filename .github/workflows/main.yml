@@ -58,7 +58,11 @@ jobs:
       - name: Copy EXE as SCR
         run: |
           copy runtime\ControlledMatrix.exe runtime\ControlledMatrix.scr
-
+      
+      - name: Checkout main branch
+        run: |
+          git fetch origin main
+          git checkout main
       - name: Commit EXE and SCR to repo with LFS
         run: |
           git config --global user.name "github-actions[bot]"
