@@ -7,7 +7,7 @@
 ```
 
 ### THERE IS NO SUPPORT FOR LINUX or MAC YET. USING TOOLS IN LINUX MAY GIVE UNDESIRED RESULTS (I have no idea baccically)
-
+### File auto updates
 
 Terminal Animation (low quality)
 
@@ -27,7 +27,7 @@ Terminal Animation (low quality)
 ###### (Hints)
 ###### Pressing v genereats a video in 4K
 ###### CTRL + SHIFT + ALT for chanigng colour
-###### There are tweleve variaints of colours, (Green, Red, Blue, Yellow, Magenta, CYan, White, Gray, Light Blue, Orange, Pink, Mixed, Mixed v2  (scrolls through the variaints one by one at a set pace in menu) )
+###### There are tweleve variaints of colours, (Green, Red, Blue, Yellow, Magenta, CYan, White, Gray, Light Blue, Orange, Pink, Glitchm Mixed, Mixed v2  (scrolls through the variaints one by one at a set pace in menu) )
 
 * This is how Controlled Matrix works!
 Now, you can choose between a screensaver, and a wallpaper
