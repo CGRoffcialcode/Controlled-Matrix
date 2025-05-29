@@ -14,7 +14,7 @@ import requests
 import tempfile
 import subprocess
 
-__version__ = "1.8.0"
+__version__ = "1.9.0"
 GITHUB_RAW_URL = "https://raw.githubusercontent.com/CGRoffcialcode/Controlled-Matrix/main/Source%20code/main.py"
 GITHUB_VERSION_URL = "https://raw.githubusercontent.com/CGRoffcialcode/Controlled-Matrix/main/version.txt"
 
