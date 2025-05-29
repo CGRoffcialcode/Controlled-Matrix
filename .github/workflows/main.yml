@@ -1,0 +1,52 @@
+name: Build, Release, and Prepare EXE
+
+on:
+  push:
+    tags:
+      - 'v*'   # Triggers on tags like v1.0.0
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller pillow imageio numpy requests keyboard
+
+      - name: Clean runtime folder
+        run: |
+          if exist runtime (
+            del /q /f runtime\*
+            for /d %%i in (runtime\*) do rmdir /s /q "%%i"
+          ) else (
+            mkdir runtime
+          )
+
+      - name: Build EXE with PyInstaller
+        run: |
+          pyinstaller --onefile --name "ControlledMatrix" --icon=static\Logo.ico --distpath runtime "Source code/main.py"
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: runtime/ControlledMatrix.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download EXE from Release
+        run: |
+          curl -L -o runtime/ControlledMatrix.exe "https://github.com/${{ github.repository }}/releases/latest/download/ControlledMatrix.exe"
+
+      - name: Copy EXE as SCR
+        run: |
+          copy runtime\ControlledMatrix.exe runtime\ControlledMatrix.scr
