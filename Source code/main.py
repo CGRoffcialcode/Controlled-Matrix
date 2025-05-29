@@ -30,6 +30,7 @@ def check_for_update():
         resp = requests.get(GITHUB_VERSION_URL, timeout=5)
         if resp.status_code != 200:
             print("Could not check for updates (version file not found).")
+            input("Press Enter to continue...")
             return
         latest_version = resp.text.strip()
         if latest_version == __version__:
@@ -96,11 +97,15 @@ os.startfile(final_exe)
                     with open(__file__, "w", encoding="utf-8") as f:
                         f.write(code)
                     print("Update complete! Please restart Controlled Matrix.")
+                    input("Press Enter to exit...")
                     sys.exit(0)
                 else:
                     print("Failed to download the latest code.")
+                    input("Press Enter to exit...")
+                    sys.exit(0)
         else:
             print("Your version is newer than the latest release (dev build?).")
+            input("Press Enter to exit...")
     except Exception as e:
         print(f"Update check failed: {e}")
 
