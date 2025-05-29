@@ -14,7 +14,7 @@ import requests
 import tempfile
 import subprocess
 
-__version__ = "1.9.0"
+__version__ = "2.0.0"
 GITHUB_RAW_URL = "https://raw.githubusercontent.com/CGRoffcialcode/Controlled-Matrix/main/Source%20code/main.py"
 GITHUB_VERSION_URL = "https://raw.githubusercontent.com/CGRoffcialcode/Controlled-Matrix/main/version.txt"
 
@@ -42,7 +42,7 @@ def check_for_update():
 
             # If running as EXE, use updater method
             if getattr(sys, 'frozen', False):
-                exe_url = "https://github.com/CGRoffcialcode/Controlled-Matrix/releases/latest/download/ControlledMatrix.exe"
+                exe_url = "https://github.com/CGRoffcialcode/Controlled-Matrix/"
                 tempdir = tempfile.gettempdir()
                 new_exe_path = os.path.join(tempdir, "ControlledMatrix_new.exe")
                 updater_path = os.path.join(tempdir, "matrix_updater.py")
