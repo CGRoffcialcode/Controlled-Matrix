@@ -25,52 +25,47 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyinstaller pillow imageio numpy requests keyboard
 
-      - name: Clean runtime folder
+      - name: Clean exe (runtime here) folder
         shell: cmd
         run: |
-          if exist runtime (
-            del /q /f runtime\*
-            for /d %%i in (runtime\*) do rmdir /s /q "%%i"
+          if exist "exe (runtime here)" (
+            del /q /f "exe (runtime here)\*"
+            for /d %%i in ("exe (runtime here)\*") do rmdir /s /q "%%i"
           ) else (
-            mkdir runtime
+            mkdir "exe (runtime here)"
           )
 
       - name: Build EXE with PyInstaller
         run: |
-          pyinstaller --onefile --name "ControlledMatrix" --icon=static\Logo.ico --distpath runtime "Source code/main.py"
+          pyinstaller --onefile --name "ControlledMatrix" --icon=static\Logo.ico --distpath "exe (runtime here)" "Source code/main.py"
 
-      - name: Upload Release Asset
-        uses: softprops/action-gh-release@v2
-        with:
-          files: runtime/ControlledMatrix.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-        
       - name: Set up Git LFS
         run: |
           git lfs install
           git lfs track "*.exe"
           git lfs track "*.scr"
           git add .gitattributes
-      
-      - name: Download EXE from Release
-        run: |
-          curl -L -o runtime/ControlledMatrix.exe "https://github.com/${{ github.repository }}/releases/latest/download/ControlledMatrix.exe"
-      
+
       - name: Copy EXE as SCR
         run: |
-          copy runtime\ControlledMatrix.exe runtime\ControlledMatrix.scr
-      
+          copy "exe (runtime here)\ControlledMatrix.exe" "exe (runtime here)\ControlledMatrix.scr"
+
       - name: Checkout main branch
         run: |
           git fetch origin main
           git checkout main
-      - name: Commit EXE and SCR to repo with LFS
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add runtime/ControlledMatrix.exe runtime/ControlledMatrix.scr
-          git commit -m "Automated: Add built EXE and SCR to runtime folder [skip ci]" || echo "Nothing to commit"
-          git push
 
-      
+            - name: Remove old files from exe (runtime here) in repo
+      - run: |
+          git fetch origin main
+          git checkout main
+          if exist "exe (runtime here)" (
+            del /q /f "exe (runtime here)\*"
+            for /d %%i in ("exe (runtime here)\*") do rmdir /s /q "%%i"
+          )
+          git rm -rf "exe (runtime here)" || echo "Nothing to remove"
+          git commit -am "Automated: Clean exe (runtime here) folder before build [skip ci]" || echo "Nothing to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        shell: cmd
