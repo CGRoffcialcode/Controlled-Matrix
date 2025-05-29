@@ -11,8 +11,10 @@ import imageio
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import requests
+import tempfile
+import subprocess
 
-__version__ = "1.6.0"
+__version__ = "1.7.0"
 GITHUB_RAW_URL = "https://raw.githubusercontent.com/CGRoffcialcode/Controlled-Matrix/main/Source%20code/main.py"
 GITHUB_VERSION_URL = "https://raw.githubusercontent.com/CGRoffcialcode/Controlled-Matrix/main/version.txt"
 
@@ -36,27 +38,67 @@ def check_for_update():
             return
         if tuple(map(int, latest_version.split("."))) > tuple(map(int, __version__.split("."))):
             print(f"New version available: {latest_version}. Updating...")
-            code_resp = requests.get(GITHUB_RAW_URL, timeout=10, stream=True)
-            if code_resp.status_code == 200:
-                import shutil
-                shutil.copy(__file__, __file__ + ".bak")
-                total = int(code_resp.headers.get('content-length', 0))
-                downloaded = 0
-                code = ""
-                chunk_size = 8192
-                for chunk in code_resp.iter_content(chunk_size=chunk_size):
-                    if chunk:
-                        code += chunk.decode('utf-8')
-                        downloaded += len(chunk)
-                        percent = min(1.0, downloaded / total) if total else 1.0
-                        update_progress_bar(percent)
-                print("\nWriting update...")
-                with open(__file__, "w", encoding="utf-8") as f:
-                    f.write(code)
-                print("Update complete! Please restart Controlled Matrix.")
+
+            # If running as EXE, use updater method
+            if getattr(sys, 'frozen', False):
+                exe_url = "https://github.com/CGRoffcialcode/Controlled-Matrix/releases/latest/download/ControlledMatrix.exe"
+                tempdir = tempfile.gettempdir()
+                new_exe_path = os.path.join(tempdir, "ControlledMatrix_new.exe")
+                updater_path = os.path.join(tempdir, "matrix_updater.py")
+
+                print("Downloading new version...")
+                with requests.get(exe_url, stream=True) as r:
+                    r.raise_for_status()
+                    with open(new_exe_path, 'wb') as f:
+                        for chunk in r.iter_content(chunk_size=8192):
+                            if chunk:
+                                f.write(chunk)
+                print("Writing updater script...")
+
+                with open(updater_path, "w", encoding="utf-8") as f:
+                    f.write(f"""
+import os
+import sys
+import time
+old_exe = r"{sys.executable}"
+new_exe = r"{new_exe_path}"
+final_exe = old_exe
+time.sleep(1)
+for i in range(10):
+    try:
+        os.remove(final_exe)
+        break
+    except Exception:
+        time.sleep(1)
+os.rename(new_exe, final_exe)
+os.startfile(final_exe)
+""")
+                print("Launching updater...")
+                subprocess.Popen([sys.executable, updater_path])
+                print("Exiting for update...")
                 sys.exit(0)
             else:
-                print("Failed to download the latest code.")
+                # Running as script, do normal update
+                code_resp = requests.get(GITHUB_RAW_URL, timeout=10, stream=True)
+                if code_resp.status_code == 200:
+                    shutil.copy(__file__, __file__ + ".bak")
+                    total = int(code_resp.headers.get('content-length', 0))
+                    downloaded = 0
+                    code = ""
+                    chunk_size = 8192
+                    for chunk in code_resp.iter_content(chunk_size=chunk_size):
+                        if chunk:
+                            code += chunk.decode('utf-8')
+                            downloaded += len(chunk)
+                            percent = min(1.0, downloaded / total) if total else 1.0
+                            update_progress_bar(percent)
+                    print("\nWriting update...")
+                    with open(__file__, "w", encoding="utf-8") as f:
+                        f.write(code)
+                    print("Update complete! Please restart Controlled Matrix.")
+                    sys.exit(0)
+                else:
+                    print("Failed to download the latest code.")
         else:
             print("Your version is newer than the latest release (dev build?).")
     except Exception as e:
@@ -65,7 +107,6 @@ def check_for_update():
 characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{}|;:'\",.<>?/`~"
 array = list(characters)
 
-# ASCII art for Controlled Matrix
 ascii_art_list = [
     r"""
    _____            _             _ _          _   _   __       _  
@@ -93,7 +134,6 @@ ascii_art_list = [
     """,
 ]
 
-# Define color palettes for terminal
 palettes = [
     ("Green", ["\033[92m", "\033[32m", "\033[2;32m"]),
     ("Red", ["\033[91m", "\033[31m", "\033[2;31m"]),
@@ -106,7 +146,7 @@ palettes = [
     ("Light Blue", ["\033[96m", "\033[94m", "\033[2;34m"]),
     ("Orange", ["\033[38;5;208m", "\033[33m", "\033[2;33m"]),
     ("Pink", ["\033[38;5;213m", "\033[35m", "\033[2;35m"]),
-    ("Glitch", None),  # New Glitch palette
+    ("Glitch", None),
     ("Mixed", None),
     ("Mixed v2", None),
 ]
@@ -130,7 +170,7 @@ def matrix():
     min_length = 2
     max_length = max(min_length, rows // 2)
     lengths = [random.randint(min_length, max_length) for _ in range(columns)]
-    col_palettes = [random.randint(0, len(palettes)-4) for _ in range(columns)] # exclude Glitch/Mixed/Mixed v2
+    col_palettes = [random.randint(0, len(palettes)-4) for _ in range(columns)]
 
     mixed_v2_cycle = 2
     if palettes[palette_index][0] == "Mixed v2":
@@ -146,7 +186,6 @@ def matrix():
         start_time = time.time()
         frame_count = 0
         while True:
-            # Palette switching with Ctrl+Alt+C
             if keyboard.is_pressed('ctrl+alt+c'):
                 palette_index = (palette_index + 1) % len(palettes)
                 time.sleep(0.3)
@@ -159,12 +198,9 @@ def matrix():
                         mixed_v2_cycle = 2
 
             palette_name = palettes[palette_index][0]
-
-            # Move cursor to top left
             sys.stdout.write("\033[H")
             sys.stdout.flush()
 
-            # Palette info at top left (no watermark in terminal)
             info_line = ""
             if palette_name == "Mixed v2":
                 info_line = f"Color: Mixed v2 (cycling)"
@@ -179,14 +215,12 @@ def matrix():
             sys.stdout.write(info_line.ljust(columns) + "\n")
             sys.stdout.flush()
 
-            # For Mixed v2, determine which palette to use
             if palette_name == "Mixed v2":
                 elapsed = time.time() - start_time
                 v2_palette_idx = int(elapsed // mixed_v2_cycle) % (len(palettes)-3)
             else:
                 v2_palette_idx = None
 
-            # Render matrix
             output_buffer = []
             for row in range(1, rows):
                 line = ""
@@ -200,12 +234,11 @@ def matrix():
                         elif palette_name == "Mixed v2":
                             pal = palettes[v2_palette_idx][1]
                         elif palette_name == "Glitch":
-                            # Glitch: random color (green, white, cyan, magenta, yellow), random style
                             glitch_colors = [
                                 "\033[92m", "\033[97m", "\033[96m", "\033[95m", "\033[93m"
                             ]
                             color = random.choice(glitch_colors)
-                            style = random.choice(["\033[1m", "\033[2m", ""])  # bold, dim, or normal
+                            style = random.choice(["\033[1m", "\033[2m", ""])
                             char = random.choice(array)
                             line += style + color + char + reset
                             continue
@@ -226,7 +259,6 @@ def matrix():
             sys.stdout.write("\n".join(output_buffer) + "\033[J")
             sys.stdout.flush()
 
-            # Update drops and lengths
             for i in range(columns):
                 drops[i] += 1
                 if drops[i] - lengths[i] > rows:
@@ -257,18 +289,17 @@ def save_matrix_video(
     font_path="consola.ttf"
 ):
     video_palettes = [
-        [(0,255,0), (0,180,0), (0,100,0)], # Green
-        [(255,0,0), (180,0,0), (100,0,0)], # Red
-        [(0,0,255), (0,0,180), (0,0,100)], # Blue
-        [(255,255,0), (180,180,0), (100,100,0)],# Yellow
-        [(255,0,255), (180,0,180), (100,0,100)],# Magenta
-        [(0,255,255), (0,180,180), (0,100,100)],# Cyan
-        [(255,255,255), (180,180,180), (100,100,100)], # White
-        [(128,128,128), (100,100,100), (60,60,60)], # Gray
-        [(128,200,255), (80,160,200), (40,100,150)], # Light Blue
-        [(255,128,0), (180,90,0), (100,50,0)], # Orange
-        [(255,0,128), (180,0,90), (100,0,50)], # Pink
-        # Glitch palette (special handling below)
+        [(0,255,0), (0,180,0), (0,100,0)],
+        [(255,0,0), (180,0,0), (100,0,0)],
+        [(0,0,255), (0,0,180), (0,0,100)],
+        [(255,255,0), (180,180,0), (100,100,0)],
+        [(255,0,255), (180,0,180), (100,0,100)],
+        [(0,255,255), (0,180,180), (0,100,100)],
+        [(255,255,255), (180,180,180), (100,100,100)],
+        [(128,128,128), (100,100,100), (60,60,60)],
+        [(128,200,255), (80,160,200), (40,100,150)],
+        [(255,128,0), (180,90,0), (100,50,0)],
+        [(255,0,128), (180,0,90), (100,0,50)],
     ]
 
     columns = width // font_size
@@ -292,7 +323,7 @@ def save_matrix_video(
         keyboard = None
 
     watermark_texts = ["MATRIX", "CGRofficialcode"]
-    watermark_colors = [(0,255,0), (255,255,255)]  # Green, White
+    watermark_colors = [(0,255,0), (255,255,255)]
 
     for frame in range(frames):
         if keyboard and keyboard.is_pressed('q'):
@@ -302,7 +333,6 @@ def save_matrix_video(
         img = Image.new("RGB", (width, height), (0, 0, 0))
         draw = ImageDraw.Draw(img)
 
-        # Animated watermark: switches between green "MATRIX" and white "CGRofficialcode"
         watermark_idx = (frame // (fps // 2)) % 2
         watermark = watermark_texts[watermark_idx]
         watermark_color = watermark_colors[watermark_idx]
@@ -320,7 +350,6 @@ def save_matrix_video(
             bbox_color = draw.textbbox((0, 0), color_text, font=brand_font)
             draw.text((20, 10), color_text, font=brand_font, fill=(255,255,255))
 
-            # Animated watermark (slides horizontally)
             slide_width = width - 200
             max_shift = max(1, slide_width // (font_size // 2))
             shift = frame % max_shift
@@ -342,8 +371,7 @@ def save_matrix_video(
             for row in range(rows):
                 if head - length < row <= head:
                     depth = head - row
-                    if palette_index == 11:  # Glitch
-                        # Glitch: random color (green, white, cyan, magenta, yellow), random font size
+                    if palette_index == 11:
                         glitch_colors = [
                             (0,255,0), (255,255,255), (0,255,255), (255,0,255), (255,255,0)
                         ]
@@ -386,7 +414,6 @@ def save_matrix_video(
                 if palette_index == len(video_palettes):
                     col_palettes[i] = random.randint(0, len(video_palettes)-1)
 
-        # Progress bar (no timer)
         if frame % max(1, fps // 2) == 0 or frame == frames - 1:
             percent = (frame + 1) / frames
             bar_length = 40
@@ -489,7 +516,7 @@ if __name__ == "__main__":
 
             frames = int(minutes * 60 * fps)
             duration_sec = minutes * 60
-            mb_per_sec = 4  # 4 MB/sec for 4K (rough estimate)
+            mb_per_sec = 4
             estimated_size_mb = duration_sec * mb_per_sec
             estimated_size_gb = estimated_size_mb / 1024
             print(f"\nEstimated video size: {estimated_size_mb:.1f} MB ({estimated_size_gb:.2f} GB) for {minutes} minute(s) at {width}x{height} {fps}fps.\n")
