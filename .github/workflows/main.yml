@@ -55,8 +55,8 @@ jobs:
           git fetch origin main
           git checkout main
 
-            - name: Remove old files from exe (runtime here) in repo
-      - run: |
+      - name: Remove old files from exe (runtime here) in repo
+        run: |
           git fetch origin main
           git checkout main
           if exist "exe (runtime here)" (
