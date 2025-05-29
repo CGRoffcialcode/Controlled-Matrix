@@ -43,11 +43,28 @@ jobs:
           files: runtime/ControlledMatrix.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-
+        
+      - name: Set up Git LFS
+        run: |
+          git lfs install
+          git lfs track "*.exe"
+          git lfs track "*.scr"
+          git add .gitattributes
+      
       - name: Download EXE from Release
         run: |
           curl -L -o runtime/ControlledMatrix.exe "https://github.com/${{ github.repository }}/releases/latest/download/ControlledMatrix.exe"
-
+      
       - name: Copy EXE as SCR
         run: |
           copy runtime\ControlledMatrix.exe runtime\ControlledMatrix.scr
+
+      - name: Commit EXE and SCR to repo with LFS
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add runtime/ControlledMatrix.exe runtime/ControlledMatrix.scr
+          git commit -m "Automated: Add built EXE and SCR to runtime folder [skip ci]" || echo "Nothing to commit"
+          git push
+
+      
