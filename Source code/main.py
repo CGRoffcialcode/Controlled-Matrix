@@ -12,7 +12,7 @@ from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import requests
 
-__version__ = "1.5.0"
+__version__ = "1.6.0"
 GITHUB_RAW_URL = "https://raw.githubusercontent.com/CGRoffcialcode/Controlled-Matrix/main/Source%20code/main.py"
 GITHUB_VERSION_URL = "https://raw.githubusercontent.com/CGRoffcialcode/Controlled-Matrix/main/version.txt"
 
@@ -32,6 +32,7 @@ def check_for_update():
         latest_version = resp.text.strip()
         if latest_version == __version__:
             print("You are running the latest version.")
+            input("Press Enter to continue...")
             return
         if tuple(map(int, latest_version.split("."))) > tuple(map(int, __version__.split("."))):
             print(f"New version available: {latest_version}. Updating...")
